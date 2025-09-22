@@ -1,0 +1,108 @@
+<template>
+    <lightning-card title="Weather Information" icon-name="utility:weather">
+        <div slot="actions">
+            <lightning-button-icon
+                icon-name="utility:refresh"
+                variant="border-filled"
+                alternative-text="Refresh Weather"
+                title="Refresh Weather"
+                onclick={handleRefresh}
+                disabled={isLoading}>
+            </lightning-button-icon>
+        </div>
+
+        <div class="slds-p-horizontal_medium slds-p-bottom_medium">
+            <!-- Loading State -->
+            <template if:true={isLoading}>
+                <div class="slds-text-align_center slds-p-vertical_medium">
+                    <lightning-spinner
+                        alternative-text="Loading weather data..."
+                        size="small">
+                    </lightning-spinner>
+                    <div class="slds-m-top_small slds-text-color_weak">
+                        Loading weather data...
+                    </div>
+                </div>
+            </template>
+
+            <!-- Error State -->
+            <template if:true={hasError}>
+                <div class="slds-notify slds-notify_alert slds-theme_alert-texture slds-theme_error" role="alert">
+                    <span class="slds-assistive-text">Error</span>
+                    <lightning-icon
+                        icon-name="utility:error"
+                        size="x-small"
+                        variant="inverse"
+                        class="slds-m-right_x-small">
+                    </lightning-icon>
+                    <h2>{errorMessage}</h2>
+                </div>
+            </template>
+
+            <!-- Weather Data Display -->
+            <template if:true={hasWeatherData}>
+                <div class="weather-container">
+                    <div class="slds-grid slds-wrap slds-gutters">
+                        <div class="slds-col slds-size_1-of-1 slds-medium-size_1-of-2">
+                            <div class="slds-p-around_medium weather-main">
+                                <!-- Toggle switch in top right corner -->
+                                <div class="slds-grid slds-grid_align-end slds-m-bottom_small">
+                                    <div class="slds-col">
+                                        <lightning-input
+                                            type="toggle"
+                                            label="Temperature Unit"
+                                            variant="label-hidden"
+                                            name="tempToggle"
+                                            checked={isFahrenheit}
+                                            onchange={handleTemperatureToggle}
+                                            message-toggle-active="°F"
+                                            message-toggle-inactive="°C"
+                                            class="temp-toggle">
+                                        </lightning-input>
+                                    </div>
+                                </div>
+
+                                <!-- Centered temperature display -->
+                                <div class="slds-text-align_center">
+                                    <div class="temperature-display">
+                                        <lightning-icon
+                                            icon-name="utility:temperature"
+                                            size="small"
+                                            class="slds-m-right_x-small temperature-icon">
+                                        </lightning-icon>
+                                        <span class="temperature-text">{temperatureDisplay}</span>
+                                    </div>
+                                    <div class="slds-text-color_weak slds-m-top_x-small">
+                                        Current Temperature
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="slds-col slds-size_1-of-1 slds-medium-size_1-of-2">
+                            <div class="slds-p-around_medium">
+                                <div class="weather-details">
+                                    <div class="slds-m-bottom_small">
+                                        <lightning-icon
+                                            icon-name="utility:location"
+                                            size="x-small"
+                                            class="slds-m-right_x-small">
+                                        </lightning-icon>
+                                        <strong>City:</strong> {cityDisplay}
+                                    </div>
+                                    <div>
+                                        <lightning-icon
+                                            icon-name="utility:description"
+                                            size="x-small"
+                                            class="slds-m-right_x-small">
+                                        </lightning-icon>
+                                        <strong>Conditions:</strong> {descriptionDisplay}
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </template>
+        </div>
+    </lightning-card>
+</template>

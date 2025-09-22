@@ -1,0 +1,54 @@
+.weather-container {
+    background: linear-gradient(135deg, #74b9ff 0%, #0984e3 100%);
+    border-radius: 8px;
+    color: white;
+    margin-top: 0.5rem;
+}
+
+.weather-main {
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: 8px;
+    backdrop-filter: blur(10px);
+}
+
+.temperature-display {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 0.5rem;
+}
+
+.temperature-text {
+    font-size: 2.5rem;
+    font-weight: bold;
+    margin-left: 0.5rem;
+}
+
+.temperature-icon {
+    color: #ffeaa7;
+}
+
+.weather-details {
+    color: white;
+}
+
+.weather-details lightning-icon {
+    color: #ffeaa7;
+}
+
+.slds-notify.slds-theme_error {
+    margin-bottom: 1rem;
+}
+
+/* Toggle switch styling */
+.temp-toggle {
+    max-width: 80px;
+}
+
+/* Ensure proper spacing for centered content */
+.weather-main {
+    position: relative;
+    min-height: 120px;
+    display: flex;
+    flex-direction: column;
+}
